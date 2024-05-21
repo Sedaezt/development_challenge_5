@@ -1,43 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.querySelector('.start-button');
+
+    startButton.addEventListener('click', startGame);
+});
+
+function startGame() {
+    const startPageDiv = document.getElementById('start-page');
+    const mapDiv = document.getElementById('map');
+    const messageDiv = document.getElementById('message');
+    const quizDiv = document.getElementById('quiz');
+    const scoreDiv = document.getElementById('score');
+
+    startPageDiv.classList.add('hidden');
+    mapDiv.classList.remove('hidden');
+    messageDiv.classList.remove('hidden');
+    quizDiv.classList.remove('hidden');
+    scoreDiv.classList.remove('hidden');
+
+    // kaart weergave
     const map = L.map('map').setView([50.8503, 4.3517], 8); // Centrum van België
 
-    //map van Leaflat
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    //vraagjes
     const quizLocations = [
-        { lat: 50.8503, lng: 4.3517, city: 'Brussel', question: 'Wat is de hoofdstad van België?', answer: 'Brussel' },
-        { lat: 51.0543, lng: 3.7174, city: 'Gent', question: 'Wat is de hoofdstad van Oost-Vlaaderen?', answer: 'Gent' },
-        { lat: 51.2194, lng: 4.4025, city: 'Antwerpen', question: 'Wat is de hoofdstad van Antwerpen?', answer: 'Antwerpen' },
-        // Voeg meer quizlocaties toe zoals gewenst
+        { lat: 50.8503, lng: 4.3517, city: 'Brussel', question: 'Welke beroemde standbeeld wordt beschouwd als het symbool van de stad en staat bekend om zijn kleine formaat?', answer: 'Manneken Pis' },
+        { lat: 51.0543, lng: 3.7174, city: 'Gent', question: 'Wat is de bekendste waterloop die door het centrum van Gent stroomt?', answer: 'De Leie' },
+        { lat: 51.2194, lng: 4.4025, city: 'Antwerpen', question: 'Wat is de traditionele naam voor het ambacht van het maken van handgemaakte producten met behulp van naald en draad, een ambacht dat vaak wordt geassocieerd met de rijke geschiedenis van Antwerpen?', answer: 'Handwerpen' },
     ];
 
-    // score bijhouden
     let score = 0;
     let currentQuestion = null;
+    let currentCircle = null;
 
-    // declareren
-    const messageDiv = document.querySelector('.message');
-    const quizDiv = document.querySelector('.quiz');
     const questionDiv = document.querySelector('.quiz-question');
-    const answerInput = document.querySelector('.quiz-answer');
+    const answerInput = document.getElementById('quiz-answer');
     const submitButton = document.querySelector('.submit-answer');
     const scoreValue = document.querySelector('.score-value');
 
-    // een rode marker toevoegen
+    // Voegt een marker toe 
     quizLocations.forEach(loc => {
         const circle = L.circle([loc.lat, loc.lng], {
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5,
-            radius: 500 // Straal van de cirkel
+            radius: 500 // Straal van de cirkel in meters
         }).addTo(map);
 
-        circle.bindPopup(`Klik om een vraag te beantwoorden over ${loc.city}`);
+        circle.bindPopup(`Click to answer a question about ${loc.city}`);
         circle.on('click', () => {
-            showQuestion(loc);
+            showQuestion(loc, circle);
         });
     });
 
@@ -45,9 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
         scoreValue.innerText = score;
     }
 
-    function showQuestion(loc) {
+    function showQuestion(loc, circle) {
         currentQuestion = loc;
-        messageDiv.innerText = `Je bent dichtbij ${loc.city}. Antwoord onderstaande vraag.`;
+        currentCircle = circle;
+        messageDiv.innerText = `You are near ${loc.city}. Answer the question below.`;
         questionDiv.innerText = loc.question;
         quizDiv.style.display = 'block';
     }
@@ -56,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const userLat = position.coords.latitude;
         const userLng = position.coords.longitude;
 
-        // Controleert of de gebruiker in de buurt is van een quizlocatie
+        // Controleert of de gebruiker in de buurt
         quizLocations.forEach(loc => {
             const distance = calculateDistance(userLat, userLng, loc.lat, loc.lng);
             if (distance < 0.5) { // afstand in kilometers
@@ -77,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const distance = R * c; // Afstand in kilometers
+        const distance = R * c; // Afstand in km
         return distance;
     }
 
@@ -90,9 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuestion && userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase()) {
             score += 1;
             updateScore();
-            messageDiv.innerText = `Juist! Je score is nu ${score}.`;
+            messageDiv.innerText = `Correct! Your score is now ${score}.`;
+            map.removeLayer(currentCircle);
         } else {
-            messageDiv.innerText = `Fount. Probeer opnieuw!`;
+            messageDiv.innerText = `Incorrect. Try again!`;
         }
         answerInput.value = '';
         quizDiv.style.display = 'none';
@@ -105,6 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timeout: 5000
         });
     } else {
-        alert('Geolocatie wordt niet ondersteund door je browser');
+        alert('Geolocation is not supported by your browser');
     }
-});
+}

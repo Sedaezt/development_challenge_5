@@ -2,29 +2,22 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 20px;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
 }
 
 #map {
     height: 60vh;
     width: 80%;
     margin-bottom: 20px;
-}
-
-.message {
-    padding: 10px;
-    font-size: 18px;
-}
-
-.quiz {
-    margin-bottom: 20px;
-}
-
-.quiz-question {
-    margin-bottom: 10px;
-}
-
-.score {
-    font-size: 18px;
 }

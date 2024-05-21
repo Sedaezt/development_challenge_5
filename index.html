@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Raad de gebeurtenis van de stad!</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raad de gebeurtenissen van de stad</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>Raad de hoofdstad!</h1>
-    <div id="map"></div>
-    <div class="message"></div>
-    <div class="quiz">
-        <h2>De vraagjes: </h2>
+</head>
+<body>
+    <div id="start-page" class="container">
+        <h1>Raad de gebeurtenissen van de stad!</h1>
+        <p>Zoek de 10 rode stipjes en beantwoord de vraagjes!</p>
+        <button class="start-button">Start</button>
+    </div>
+    
+    <div id="map" class="hidden"></div>
+    <div id="message" class="hidden"></div>
+    <div id="quiz" class="hidden">
+        <h2>Quiz</h2>
         <div class="quiz-question"></div>
-        <input type="text" class="quiz-answer" placeholder="Antwoord">
+        <input type="text" id="quiz-answer" placeholder="Uw antwoord hier">
         <button class="submit-answer">Antwoord indienen</button>
     </div>
 
-    <div class="score">
+    <div id="score" class="hidden">
         <h2>Score: <span class="score-value">0</span></h2>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
