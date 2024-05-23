@@ -16,20 +16,27 @@
         </div>
     </div>
     
+    <h3 id="title" class="hidden">Raad de gebeurtenis</h3>
     <div id="map" class="hidden"></div>
     <div id="message" class="hidden"></div>
     <div id="quiz" class="hidden">
-        <h2>Quiz</h2>
         <div class="quiz-question"></div>
         <input type="text" id="quiz-answer" placeholder="Uw antwoord hier">
         <button class="submit-answer">Antwoord indienen</button>
     </div>
 
-    <div id="score" class="hidden">
-        <h2>Score: <span class="score-value">0</span></h2>
+    <div id="answer-modal" class="modal hidden">
+        <div class="modal-content">
+            <p class="modal-message"></p>
+            <img src="" alt="Monument Foto" class="modal-image">
+            <p id="popup-text"></p>
+            <button class="close-modal">Close</button>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="./js/script.js"></script>
+    <script type="module" src="./js/script.js"></script>
+    <script type="module" src="./js/vraagjes.js"></script>
+
 </body>
 </html>

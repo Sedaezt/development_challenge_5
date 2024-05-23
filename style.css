@@ -7,6 +7,10 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    background: #BE93C5;  
+    background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5); 
+    background: linear-gradient(to right, #7BC6CC, #BE93C5); 
+
 }
 
 #start-page {
@@ -44,6 +48,54 @@ body {
 
 #map {
     height: 60vh;
-    width: 80%;
+    width: 90%;
     margin-bottom: 20px;
+    border-radius: 24px;
+}
+
+#title {
+    font-size: 24px;
+    margin-top: 50px;
+}
+
+.modal {
+    position: absolute; 
+    top: 350px; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000; 
+    width: 400px; 
+    height: 500px;
+    overflow: auto; 
+}
+
+.modal-content {
+    text-align: center;
+    font-size: 14px;
+}
+
+.modal-image {
+    width: 80%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 24px;
+}
+
+
+.close-modal {
+    margin-top: 0px;
+    font-size: 20px;
+    padding: 8px 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    background-color: #555;
 }
