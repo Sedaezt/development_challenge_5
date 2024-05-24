@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Raad de gebeurtenissen van de stad</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-</head>
-<body>
+  </head>
+  <body>
     <div id="start-page">
-        <div class="container">
-            <h1>Roadtrip door België!</h1>
-            <p>Ga naar een van de vijf steden en ontdek het monument dat de stad speciaal maakt! Veel plezier! 😊</p>
-            <button class="start-button">Start</button>
-        </div>
+      <div class="container">
+        <h1>Roadtrip door België!</h1>
+        <p>
+          Ga naar een van de vijf steden en ontdek het monument dat de stad
+          speciaal maakt! Veel plezier! 😊
+        </p>
+        <button class="start-button">Start</button>
+      </div>
     </div>
-    
-    <h3 id="title" class="hidden">Roadrip door België</h3>
+
+    <h3 id="title" class="hidden">Roadrip door België!</h3>
+    <p id="paragraaf" class="hidden">
+      Bezoek de zwarte stippen om de monumenten te ontdekken.
+    </p>
     <div id="map" class="hidden"></div>
     <div id="message" class="hidden"></div>
     <div id="quiz" class="hidden">
-        <div class="quiz-question"></div>
-        <input type="text" id="quiz-answer" placeholder="Uw antwoord hier">
-        <button class="submit-answer">Antwoord indienen</button>
+      <div class="quiz-question"></div>
+      <div class="input-answer">
+        <input type="text" id="quiz-answer" placeholder="Uw antwoord hier" />
+        <button class="submit-answer">Opslaan</button>
+      </div>
     </div>
 
     <div id="answer-modal" class="modal hidden">
-        <div class="modal-content">
-            <p class="modal-message"></p>
-            <img src="" alt="Monument Foto" class="modal-image">
-            <p id="popup-text"></p>
-            <button class="close-modal">Close</button>
-        </div>
+      <div class="modal-content">
+        <p class="modal-message"></p>
+        <img src="" alt="Monument Foto" class="modal-image" />
+        <p id="popup-text"></p>
+        <button class="close-modal">Close</button>
+      </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script type="module" src="./js/script.js"></script>
-</body>
+  </body>
 </html>
