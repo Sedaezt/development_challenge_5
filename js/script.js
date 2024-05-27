@@ -25,16 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.add('hidden');
     });
 
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
     // startpagina verbergen en kaart tonen
     function startGame() {
-        const startPageDiv = document.getElementById('start-page');
-        startPageDiv.classList.add('hidden');
-        mapDiv.classList.remove('hidden');
-        messageDiv.classList.remove('hidden');
-        quizDiv.classList.remove('hidden');
-        title.classList.remove('hidden');
-        paragraaf.classList.remove('hidden');
-
+    const startPageDiv = document.getElementById('start-page');
+    startPageDiv.classList.add('hidden');
+    mapDiv.classList.remove('hidden');
+    messageDiv.classList.remove('hidden');
+    quizDiv.classList.remove('hidden');
+    title.classList.remove('hidden');
+    paragraaf.classList.remove('hidden');
+    
         // Kaart weergave (Leaflet)
         const map = L.map(mapDiv).setView([50.8503, 4.3517], 8);
 
